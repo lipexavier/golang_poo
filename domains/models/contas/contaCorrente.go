@@ -1,7 +1,9 @@
 package contas
 
+import "golang_poo/domains/models/clientes"
+
 type ContaCorrente struct {
-	Titular       string
+	Titular       clientes.Titular
 	NumeroAgencia int
 	NumeroConta   int
 	Saldo         float64
