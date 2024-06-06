@@ -1,4 +1,4 @@
-package models
+package contas
 
 type ContaCorrente struct {
 	Titular       string
@@ -13,24 +13,23 @@ func (c *ContaCorrente) Sacar(valorDoSaque float64) string {
 		c.Saldo -= valorDoSaque
 		return "Saque realizado com sucesso!"
 	} else {
-		return "Saldo insufiiente!"
+		return "Saldo insuficiente!"
 	}
 }
 
 func (c *ContaCorrente) Depositar(valorDeposito float64) (string, float64) {
 	if valorDeposito > 0 {
 		c.Saldo += valorDeposito
-		return "Deposito realizado com sucesso!", c.Saldo
+		return "Depósito realizado com sucesso!", c.Saldo
 	} else {
-		return "Valor do deposito é inválido!", c.Saldo
+		return "Valor do depósito é inválido!", c.Saldo
 	}
-
 }
 
-func (c *ContaCorrente) Transferir(valorTransferencia float64, contaTransferencia *ContaCorrente) bool {
-	if valorTransferencia < c.Saldo && valorTransferencia > 0 {
-		contaTransferencia.Depositar(valorTransferencia)
-		c.Sacar(valorTransferencia)
+func (c *ContaCorrente) Transferir(valorTransferencia float64, contaDestino *ContaCorrente) bool {
+	if valorTransferencia > 0 && valorTransferencia <= c.Saldo {
+		c.Saldo -= valorTransferencia
+		contaDestino.Depositar(valorTransferencia)
 		return true
 	} else {
 		return false

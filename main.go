@@ -2,8 +2,7 @@ package main
 
 import (
 	"fmt"
-
-	"github.com/lipeXavier/golang_poo/models/contas"
+	contas "golang_poo/domains/models"
 )
 
 func main() {
